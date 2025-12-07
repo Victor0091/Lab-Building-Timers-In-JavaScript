@@ -1,34 +1,37 @@
-/**
- * Function: recurringTimer
- * Description: Starts a recurring timer that logs a message at fixed intervals.
- *
- * Steps:
- * 1. Accept two parameters: `message` (string) and `interval` (in milliseconds).
- * 2. Use `setInterval` to repeatedly log the message at the specified interval.
- * 3. Return the timer ID so it can be used for stopping the timer.
- *
- * Example Usage:
- * const timerId = recurringTimer("Hello, world!", 2000); // Logs "Hello, world!" every 2 seconds.
- */
+function delayedReminder(message, delay) {
+  setTimeout(() => {
+    console.log(message);
+  }, delay);
+}
 
-/**
- * Function: stopRecurringTimer
- * Description: Stops a recurring timer using its ID.
- *
- * Steps:
- * 1. Accept the timer ID as a parameter.
- * 2. Use `clearInterval` to stop the recurring timer.
- *
- * Example Usage:
- * stopRecurringTimer(timerId); // Stops the recurring timer started with the given ID.
- */
+function countdownTimer(start) {
+  let time = start;
+
+  const interval = setInterval(() => {
+    console.log(time);
+    time--;
+
+    if (time === 0) {
+      clearInterval(interval);
+    }
+  }, 1000);
+
+  return interval;
+}
+
 function recurringTimer(message, interval) {
-  // Set up a timer using setInterval to log the message
-  // Return the timer ID
+  return setInterval(() => {
+    console.log(message);
+  }, interval);
 }
 
 function stopRecurringTimer(timerId) {
-  // Stop the timer using clearInterval
+  clearInterval(timerId);
 }
 
-module.exports = { recurringTimer, stopRecurringTimer };
+module.exports = {
+  delayedReminder,
+  countdownTimer,
+  recurringTimer,
+  stopRecurringTimer
+};

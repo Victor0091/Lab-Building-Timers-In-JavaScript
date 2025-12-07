@@ -1,0 +1,46 @@
+test/countdown.test.js
+jest.useFakeTimers();
+test('countdownTimer should log remaining time at intervals and stop at 0', () => {
+    const startTime = 5;
+    const logSpy = jest.spyOn(console, 'log');
+    countdownTimer(startTime);
+    jest.advanceTimersByTime(1000);
+    for (let i = startTime; i > 0; i--) {
+        expect(logSpy).toHaveBeenCalledWith(i);
+        jest.advanceTimersByTime(1000);
+    }
+    expect(logSpy).toHaveBeenCalledWith(0);
+    logSpy.mockRestore();
+});
+
+test/recurringTimer.test.js
+jest.useFakeTimers();
+test('recurringTimer should log the message at the specified interval', () => {
+    const message = 'Hello!';
+    const logSpy = jest.spyOn(console, 'log');
+    recurringTimer(message, 1000, 3);
+    jest.advanceTimersByTime(1000);
+    expect(logSpy).toHaveBeenCalledTimes(1);
+    jest.advanceTimersByTime(1000);
+    expect(logSpy).toHaveBeenCalledTimes(2);
+    jest.advanceTimersByTime(1000);
+    expect(logSpy).toHaveBeenCalledTimes(3);
+    logSpy.mockRestore();
+});
+
+test/reminder.test.js
+jest.useFakeTimers();
+test('delayedReminder should log the message after the specified delay', () => {
+    const message = 'Reminder!';
+    const logSpy = jest.spyOn(console, 'log');
+    delayedReminder(message, 1000);
+    jest.advanceTimersByTime(1000);
+    expect(logSpy).toHaveBeenCalledTimes(1);
+    expect(logSpy).toHaveBeenCalledWith(message);
+    logSpy.mockRestore();
+});
+
+test/hello.test.js
+test('hello world', () => {
+    expect('hello world').toBe('hello world');
+});
